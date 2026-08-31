@@ -1,5 +1,8 @@
 # aws-playwright-cicd
 
+[![CI](https://github.com/Oheri99/aws-playwright-cicd/actions/workflows/playwright.yml/badge.svg)](https://github.com/Oheri99/aws-playwright-cicd/actions/workflows/playwright.yml)
+[![CodeBuild](https://img.shields.io/badge/AWS-CodeBuild-blue?logo=amazonaws)](buildspec.yml)
+
 A Playwright + TypeScript automation project for running browser tests in local development and CI pipelines.
 
 ## Prerequisites
@@ -52,7 +55,12 @@ PLAYWRIGHT_WORKERS=1
 
 ## CI
 
-This project includes a CodeBuild configuration in `buildspec.yml` for running tests in AWS CodeBuild.
+This project includes two CI paths:
+
+- GitHub Actions: [.github/workflows/playwright.yml](.github/workflows/playwright.yml)
+- AWS CodeBuild: [buildspec.yml](buildspec.yml)
+
+Both run the same validation flow: install dependencies, install browsers, type-check, and execute the Playwright suite.
 
 ## Project structure
 
