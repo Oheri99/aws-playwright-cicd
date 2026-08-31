@@ -1,0 +1,42 @@
+version: 0.2
+
+phases:
+
+  install:
+    commands:
+      - echo "Installing dependencies..."
+      - npm ci
+      - echo "Installing Playwright browsers..."
+      - npx playwright install --with-deps chromium
+
+  pre_build:
+    commands:
+      - echo "Running TypeScript validation..."
+      - npm run lint
+
+  build:
+    commands:
+      - echo "Running Playwright tests..."
+      - npm test
+
+  post_build:
+    commands:
+      - echo "Build completed."
+      - echo "Generating test artifacts..."
+
+artifacts:
+  files:
+    - playwright-report/**/*
+    - test-results/**/*
+
+  discard-paths: no
+
+reports:
+  playwright-junit:
+    files:
+      - test-results/results.xml
+    file-format: JUNITXML
+
+cache:
+  paths:
+    - '/root/.npm/**/*'
